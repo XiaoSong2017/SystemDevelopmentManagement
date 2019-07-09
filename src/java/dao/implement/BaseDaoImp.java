@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 
 public class BaseDaoImp<T> implements BaseDao<T> {
     private SessionFactory sessionFactory;
+
     private Page<T> page;
 
     public BaseDaoImp() {
