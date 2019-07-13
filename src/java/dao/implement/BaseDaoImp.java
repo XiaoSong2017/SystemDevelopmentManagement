@@ -2,11 +2,12 @@ package dao.implement;
 
 import bean.Page;
 import dao.BaseDao;
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class BaseDaoImp<T> implements BaseDao<T> {
     private SessionFactory sessionFactory;
@@ -70,19 +71,21 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 
     @Override
     public List<T> getAll(Class<T> entityClass) {
-        return this.getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName()).getResultList();
+        return getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName()).getResultList();
     }
 
     @Override
     public Page getAllByPage(Class<T> entityClass, int pageNumber, int pageSize) {
-        Query query = this.getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName());
-        this.page.setCurrentPage((long)pageNumber);
-        this.page.setPageSize((long)pageSize);
-        this.page.setTotalRecords((long)query.getMaxResults());
+        page.setCurrentPage(pageNumber);
+        page.setPageSize(pageSize);
+        Session session=getSessionFactory().getCurrentSession();
+        Query query = session.createQuery("select count(en) from "+entityClass.getSimpleName()+" en");
+        page.setTotalRecords(Integer.parseInt(String.valueOf(query.getSingleResult())));
+        page.setTotalPageNo(Math.round(Math.ceil(page.getTotalRecords()/ (double)pageSize)));
+        query=session.createQuery("from " + entityClass.getSimpleName());
         query.setMaxResults(pageSize);
-        this.page.setTotalPageNo(Math.round(Math.ceil((double)query.getMaxResults() / (double)pageSize)));
-        this.page.setData(query.setFirstResult(pageNumber - 1).setMaxResults(pageSize).getResultList());
-        return this.page;
+        page.setData(query.setFirstResult(pageNumber - 1).setMaxResults(pageSize).getResultList());
+        return page;
     }
 
     @Override

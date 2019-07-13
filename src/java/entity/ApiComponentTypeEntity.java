@@ -12,9 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(
-    name = "API_COMPONENT_TYPES"
-)
+@Table(name = "API_COMPONENT_TYPES")
 public class ApiComponentTypeEntity {
     private long id;
     private String name;
@@ -24,11 +22,7 @@ public class ApiComponentTypeEntity {
     }
 
     @Id
-    @Column(
-        name = "ID",
-        nullable = false,
-        precision = 0
-    )
+    @Column(name = "ID", nullable = false)
     public long getId() {
         return this.id;
     }
@@ -38,11 +32,7 @@ public class ApiComponentTypeEntity {
     }
 
     @Basic
-    @Column(
-        name = "NAME",
-        nullable = false,
-        length = 50
-    )
+    @Column(name = "NAME", nullable = false, length = 50)
     public String getName() {
         return this.name;
     }
@@ -67,10 +57,7 @@ public class ApiComponentTypeEntity {
     }
 
     @JsonIgnore
-    @OneToMany(
-        mappedBy = "apiComponentTypeByTypeId",
-        fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "apiComponentTypeByTypeId", fetch = FetchType.LAZY)
     public Set<ApiComponentEntity> getApiComponentsById() {
         return this.apiComponentsById;
     }

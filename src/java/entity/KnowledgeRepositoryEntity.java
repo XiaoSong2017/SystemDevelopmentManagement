@@ -1,21 +1,13 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
-@Table(
-    name = "KNOWLEDGE_REPOSITORY"
-)
+@Table(name = "KNOWLEDGE_REPOSITORY")
 public class KnowledgeRepositoryEntity {
     private long id;
     private long typeId;
@@ -28,10 +20,7 @@ public class KnowledgeRepositoryEntity {
     }
 
     @Id
-    @Column(
-        name = "ID",
-        nullable = false
-    )
+    @Column(name = "ID", nullable = false)
     public long getId() {
         return this.id;
     }
@@ -41,10 +30,7 @@ public class KnowledgeRepositoryEntity {
     }
 
     @Basic
-    @Column(
-        name = "TYPE_ID",
-        nullable = false
-    )
+    @Column(name = "TYPE_ID", nullable = false)
     public long getTypeId() {
         return this.typeId;
     }
@@ -54,10 +40,7 @@ public class KnowledgeRepositoryEntity {
     }
 
     @Basic
-    @Column(
-        name = "NUMBERS",
-        length = 20
-    )
+    @Column(name = "NUMBERS", length = 20)
     public String getNumber() {
         return this.number;
     }
@@ -67,10 +50,7 @@ public class KnowledgeRepositoryEntity {
     }
 
     @Basic
-    @Column(
-        name = "DESCRIPTION",
-        length = 200
-    )
+    @Column(name = "DESCRIPTION", length = 200)
     public String getDescription() {
         return this.description;
     }
@@ -81,9 +61,7 @@ public class KnowledgeRepositoryEntity {
 
     @Basic
     @Temporal(TemporalType.DATE)
-    @Column(
-        name = "DATES"
-    )
+    @Column(name = "DATES")
     public Date getDate() {
         return this.date;
     }
@@ -104,17 +82,12 @@ public class KnowledgeRepositoryEntity {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.typeId, this.number, this.description, this.date});
+        return Objects.hash(this.id, this.typeId, this.number, this.description, this.date);
     }
 
-    @ManyToOne
-    @JoinColumn(
-        name = "TYPE_ID",
-        referencedColumnName = "ID",
-        nullable = false,
-        insertable = false,
-        updatable = false
-    )
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     public KnowledgeTypeEntity getKnowledgeTypeByTypeId() {
         return this.knowledgeTypeByTypeId;
     }

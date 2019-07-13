@@ -2,31 +2,32 @@ package dao;
 
 import bean.Page;
 import com.sun.istack.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
 
 public interface BaseDao<T> {
-    T getById(@NotNull Class<T> var1, @NotNull Object var2);
+    T getById(@NotNull Class<T> entityClass, @NotNull Object id);
 
-    Serializable save(@NotNull T var1);
+    Serializable save(@NotNull T entity);
 
-    void update(@NotNull T var1);
+    void update(@NotNull T entity);
 
-    void saveOrUpdate(@NotNull T var1);
+    void saveOrUpdate(@NotNull T entity);
 
-    void delete(@NotNull T var1);
+    void delete(@NotNull T entity);
 
-    void delete(@NotNull Class<T> var1, @NotNull Object var2);
+    void delete(@NotNull Class<T> entityClass, @NotNull Object id);
 
-    List<T> getAll(@NotNull Class<T> var1);
+    List<T> getAll(@NotNull Class<T> entityClass);
 
-    Page getAllByPage(@NotNull Class<T> var1, int var2, int var3);
+    Page getAllByPage(@NotNull Class<T> entityClass, int pageNumber, int pageSize);
 
-    long count(@NotNull Class<T> var1);
+    long count(@NotNull Class<T> entityClass);
 
-    void batchToSave(@NotNull List<T> var1);
+    void batchToSave(@NotNull List<T> entities);
 
-    void batchToUpdate(@NotNull List<T> var1);
+    void batchToUpdate(@NotNull List<T> entities);
 
-    void batchToDelete(@NotNull Class<T> entityClass,@NotNull List<String> id);
+    void batchToDelete(@NotNull Class<T> entityClass, @NotNull List<String> id);
 }

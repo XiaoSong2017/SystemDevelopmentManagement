@@ -12,9 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(
-    name = "KNOWLEDGE_TYPES"
-)
+@Table(name = "KNOWLEDGE_TYPES")
 public class KnowledgeTypeEntity {
     private long id;
     private String name;
@@ -24,11 +22,7 @@ public class KnowledgeTypeEntity {
     }
 
     @Id
-    @Column(
-        name = "ID",
-        nullable = false,
-        precision = 0
-    )
+    @Column(name = "ID", nullable = false)
     public long getId() {
         return this.id;
     }
@@ -38,11 +32,7 @@ public class KnowledgeTypeEntity {
     }
 
     @Basic
-    @Column(
-        name = "NAME",
-        nullable = false,
-        length = 50
-    )
+    @Column(name = "NAME", nullable = false, length = 50)
     public String getName() {
         return this.name;
     }
@@ -63,14 +53,11 @@ public class KnowledgeTypeEntity {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.name});
+        return Objects.hash(this.id, this.name);
     }
 
     @JsonIgnore
-    @OneToMany(
-        mappedBy = "knowledgeTypeByTypeId",
-        fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "knowledgeTypeByTypeId", fetch = FetchType.LAZY)
     public Set<KnowledgeRepositoryEntity> getKnowledgeRepositoriesById() {
         return this.knowledgeRepositoriesById;
     }

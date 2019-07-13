@@ -1,5 +1,6 @@
 package service;
 
+import bean.Page;
 import dao.KnowledgeRepositoryEntityDao;
 import dao.KnowledgeTypeEntityDao;
 import entity.KnowledgeRepositoryEntity;
@@ -15,26 +16,21 @@ public class KnowledgeRepositoryService {
     public KnowledgeRepositoryService() {
     }
 
-    public KnowledgeTypeEntityDao getKnowledgeTypeEntityDao() {
-        return this.knowledgeTypeEntityDao;
-    }
-
     public void setKnowledgeTypeEntityDao(KnowledgeTypeEntityDao knowledgeTypeEntityDao) {
         this.knowledgeTypeEntityDao = knowledgeTypeEntityDao;
-    }
-
-    public KnowledgeRepositoryEntityDao getKnowledgeRepositoryEntityDao() {
-        return this.knowledgeRepositoryEntityDao;
     }
 
     public void setKnowledgeRepositoryEntityDao(KnowledgeRepositoryEntityDao knowledgeRepositoryEntityDao) {
         this.knowledgeRepositoryEntityDao = knowledgeRepositoryEntityDao;
     }
 
-    @Transactional(
-        readOnly = true
-    )
+    @Transactional(readOnly = true)
     public List<KnowledgeRepositoryEntity> getAll() {
         return this.knowledgeRepositoryEntityDao.getAll(KnowledgeRepositoryEntity.class);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<KnowledgeRepositoryEntity> getAllByPage(int pageNumber, int pageSize) {
+        return knowledgeRepositoryEntityDao.getAllByPage(KnowledgeRepositoryEntity.class,pageNumber,pageSize);
     }
 }

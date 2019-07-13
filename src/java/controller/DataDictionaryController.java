@@ -16,14 +16,10 @@ public class DataDictionaryController {
     public DataDictionaryController() {
     }
 
-    @RequestMapping({"/dataDictionaryAll"})
+    @RequestMapping("/dataDictionaryAll")
     @ResponseBody
     public List<DataDictionaryEntity> getAll() {
         return this.dataDictionaryService.getAll();
-    }
-
-    public DataDictionaryService getDataDictionaryService() {
-        return this.dataDictionaryService;
     }
 
     public void setDataDictionaryService(DataDictionaryService dataDictionaryService) {

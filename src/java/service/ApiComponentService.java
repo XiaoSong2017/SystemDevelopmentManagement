@@ -1,5 +1,6 @@
 package service;
 
+import bean.Page;
 import dao.ApiComponentEntityDao;
 import dao.ApiComponentTypeEntityDao;
 import entity.ApiComponentEntity;
@@ -31,10 +32,13 @@ public class ApiComponentService {
         this.apiComponentTypeEntityDao = apiComponentTypeEntityDao;
     }
 
-    @Transactional(
-        readOnly = true
-    )
+    @Transactional(readOnly = true)
     public List<ApiComponentEntity> getAll() {
         return this.apiComponentEntityDao.getAll(ApiComponentEntity.class);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
+        return apiComponentEntityDao.getAllByPage(ApiComponentEntity.class,pageNumber,pageSize);
     }
 }

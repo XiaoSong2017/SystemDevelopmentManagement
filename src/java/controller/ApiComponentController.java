@@ -1,5 +1,6 @@
 package controller;
 
+import bean.Page;
 import entity.ApiComponentEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,19 @@ public class ApiComponentController {
     public ApiComponentController() {
     }
 
-    public ApiComponentService getApiComponentService() {
-        return this.apiComponentService;
-    }
-
     public void setApiComponentService(ApiComponentService apiComponentService) {
         this.apiComponentService = apiComponentService;
     }
 
-    @RequestMapping({"/apiComponentAll"})
+    @RequestMapping("/apiComponentAll")
     @ResponseBody
     public List<ApiComponentEntity> getAll() {
         return this.apiComponentService.getAll();
+    }
+
+    @RequestMapping("/apiComponentAllByPage")
+    @ResponseBody
+    public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
+        return this.apiComponentService.getAllByPage(pageNumber,pageSize);
     }
 }

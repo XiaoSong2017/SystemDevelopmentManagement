@@ -1,5 +1,7 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(
-    name = "API_COMPONENTS"
-)
+@Table(name = "API_COMPONENTS")
 public class ApiComponentEntity {
     private long id;
     private long typeId;
@@ -24,11 +24,7 @@ public class ApiComponentEntity {
     }
 
     @Id
-    @Column(
-        name = "ID",
-        nullable = false,
-        precision = 0
-    )
+    @Column(name = "ID", nullable = false)
     public long getId() {
         return this.id;
     }
@@ -38,11 +34,7 @@ public class ApiComponentEntity {
     }
 
     @Basic
-    @Column(
-        name = "TYPE_ID",
-        nullable = false,
-        precision = 0
-    )
+    @Column(name = "TYPE_ID", nullable = false)
     public long getTypeId() {
         return this.typeId;
     }
@@ -52,11 +44,7 @@ public class ApiComponentEntity {
     }
 
     @Basic
-    @Column(
-        name = "FUNCTION_MACROTAXONOMY",
-        nullable = false,
-        length = 50
-    )
+    @Column(name = "FUNCTION_MACROTAXONOMY", nullable = false, length = 50)
     public String getFunctionMacrotaxonomy() {
         return this.functionMacrotaxonomy;
     }
@@ -66,11 +54,7 @@ public class ApiComponentEntity {
     }
 
     @Basic
-    @Column(
-        name = "NAME",
-        nullable = true,
-        length = 50
-    )
+    @Column(name = "NAME", length = 50)
     public String getName() {
         return this.name;
     }
@@ -83,7 +67,7 @@ public class ApiComponentEntity {
         if (this == o) {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
-            ApiComponentEntity that = (ApiComponentEntity)o;
+            ApiComponentEntity that = (ApiComponentEntity) o;
             return this.id == that.id && this.typeId == that.typeId && Objects.equals(this.functionMacrotaxonomy, that.functionMacrotaxonomy) && Objects.equals(this.name, that.name);
         } else {
             return false;
@@ -91,17 +75,12 @@ public class ApiComponentEntity {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.typeId, this.functionMacrotaxonomy, this.name});
+        return Objects.hash(this.id, this.typeId, this.functionMacrotaxonomy, this.name);
     }
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(
-        name = "TYPE_ID",
-        referencedColumnName = "ID",
-        nullable = false,
-        insertable = false,
-        updatable = false
-    )
+    @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     public ApiComponentTypeEntity getApiComponentTypeByTypeId() {
         return this.apiComponentTypeByTypeId;
     }

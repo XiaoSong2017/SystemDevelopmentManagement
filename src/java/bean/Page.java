@@ -1,7 +1,9 @@
 package bean;
 
+import java.beans.JavaBean;
 import java.util.List;
 
+@JavaBean
 public class Page<T> {
     private long currentPage;
     private long pageSize;

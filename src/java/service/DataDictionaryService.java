@@ -21,9 +21,7 @@ public class DataDictionaryService {
         this.dataDictionaryEntityDao = dataDictionaryEntityDao;
     }
 
-    @Transactional(
-        readOnly = true
-    )
+    @Transactional(readOnly = true)
     public List<DataDictionaryEntity> getAll() {
         return this.dataDictionaryEntityDao.getAll(DataDictionaryEntity.class);
     }

@@ -8,9 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(
-    name = "DATA_DICTIONARIES"
-)
+@Table(name = "DATA_DICTIONARIES")
 public class DataDictionaryEntity {
     private long id;
     private String name;
@@ -22,11 +20,7 @@ public class DataDictionaryEntity {
     }
 
     @Id
-    @Column(
-        name = "id",
-        nullable = false,
-        precision = 0
-    )
+    @Column(name = "id", nullable = false)
     public long getId() {
         return this.id;
     }
@@ -36,11 +30,7 @@ public class DataDictionaryEntity {
     }
 
     @Basic
-    @Column(
-        name = "name",
-        nullable = false,
-        length = 50
-    )
+    @Column(name = "name", nullable = false, length = 50)
     public String getName() {
         return this.name;
     }
@@ -50,11 +40,7 @@ public class DataDictionaryEntity {
     }
 
     @Basic
-    @Column(
-        name = "abbreviation",
-        nullable = true,
-        length = 50
-    )
+    @Column(name = "abbreviation", length = 50)
     public String getAbbreviation() {
         return this.abbreviation;
     }
@@ -64,11 +50,7 @@ public class DataDictionaryEntity {
     }
 
     @Basic
-    @Column(
-        name = "full_name",
-        nullable = true,
-        length = 400
-    )
+    @Column(name = "full_name", length = 400)
     public String getFullName() {
         return this.fullName;
     }
@@ -78,11 +60,7 @@ public class DataDictionaryEntity {
     }
 
     @Basic
-    @Column(
-        name = "data_type",
-        nullable = true,
-        length = 30
-    )
+    @Column(name = "data_type", length = 30)
     public String getDataType() {
         return this.dataType;
     }
@@ -103,6 +81,6 @@ public class DataDictionaryEntity {
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.name, this.abbreviation, this.fullName, this.dataType});
+        return Objects.hash(this.id, this.name, this.abbreviation, this.fullName, this.dataType);
     }
 }
