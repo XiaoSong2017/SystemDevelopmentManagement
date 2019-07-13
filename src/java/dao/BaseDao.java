@@ -60,6 +60,7 @@ public interface BaseDao<T> {
     List<T> getAll(@NotNull Class<T> entityClass);
 
     /**
+     * 根据页号获取实体对象列表
      * @param entityClass 对应实体类
      * @param pageNumber 页号
      * @param pageSize 页面大小
@@ -76,16 +77,19 @@ public interface BaseDao<T> {
     long count(@NotNull Class<T> entityClass);
 
     /**
+     * 批量保存
      * @param entities 对应实体对象列表
      */
     void batchToSave(@NotNull List<T> entities);
 
     /**
+     * 批量更新
      * @param entities 对应实体对象列表
      */
     void batchToUpdate(@NotNull List<T> entities);
 
     /**
+     * 批量删除
      * @param entityClass 对应实体类
      * @param id 对应实体ID列表
      */
