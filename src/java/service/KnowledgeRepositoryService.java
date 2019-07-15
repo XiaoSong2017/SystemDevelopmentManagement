@@ -26,7 +26,7 @@ public class KnowledgeRepositoryService {
 
     @Transactional(readOnly = true)
     public List<KnowledgeRepositoryEntity> getAll() {
-        return this.knowledgeRepositoryEntityDao.getAll(KnowledgeRepositoryEntity.class);
+        return knowledgeRepositoryEntityDao.getAll(KnowledgeRepositoryEntity.class);
     }
 
     @Transactional(readOnly = true)

@@ -1,5 +1,6 @@
 package service;
 
+import bean.Page;
 import dao.DataDictionaryEntityDao;
 import entity.DataDictionaryEntity;
 import java.util.List;
@@ -24,5 +25,10 @@ public class DataDictionaryService {
     @Transactional(readOnly = true)
     public List<DataDictionaryEntity> getAll() {
         return this.dataDictionaryEntityDao.getAll(DataDictionaryEntity.class);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<DataDictionaryEntity> getAllByPage(int pageNumber, int pageSize) {
+        return dataDictionaryEntityDao.getAllByPage(DataDictionaryEntity.class,pageNumber,pageSize);
     }
 }

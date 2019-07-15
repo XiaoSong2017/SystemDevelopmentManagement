@@ -3,13 +3,7 @@ package entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "API_COMPONENTS")
@@ -78,8 +72,8 @@ public class ApiComponentEntity {
         return Objects.hash(this.id, this.typeId, this.functionMacrotaxonomy, this.name);
     }
 
-    @JsonIgnore
-    @ManyToOne
+    //@JsonIgnore
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     public ApiComponentTypeEntity getApiComponentTypeByTypeId() {
         return this.apiComponentTypeByTypeId;

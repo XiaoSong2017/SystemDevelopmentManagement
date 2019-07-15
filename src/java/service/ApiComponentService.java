@@ -16,16 +16,8 @@ public class ApiComponentService {
     public ApiComponentService() {
     }
 
-    public ApiComponentEntityDao getApiComponentEntityDao() {
-        return this.apiComponentEntityDao;
-    }
-
     public void setApiComponentEntityDao(ApiComponentEntityDao apiComponentEntityDao) {
         this.apiComponentEntityDao = apiComponentEntityDao;
-    }
-
-    public ApiComponentTypeEntityDao getApiComponentTypeEntityDao() {
-        return this.apiComponentTypeEntityDao;
     }
 
     public void setApiComponentTypeEntityDao(ApiComponentTypeEntityDao apiComponentTypeEntityDao) {
