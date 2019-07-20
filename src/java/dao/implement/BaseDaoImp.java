@@ -13,10 +13,11 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     private SessionFactory sessionFactory;
 
     private Page<T> page;
+
     public BaseDaoImp() {
     }
 
-    protected SessionFactory getSessionFactory() {
+    private SessionFactory getSessionFactory() {
         return this.sessionFactory;
     }
 
@@ -41,30 +42,30 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     }
 
     public Serializable save(T entity) {
-        return this.getSessionFactory().getCurrentSession().save(entity);
+        return getSessionFactory().getCurrentSession().save(entity);
     }
 
     @Override
     public void update(T entity) {
-        this.getSessionFactory().getCurrentSession().update(entity);
+        getSessionFactory().getCurrentSession().update(entity);
     }
 
     @Override
     public void saveOrUpdate(T entity) {
-        this.getSessionFactory().getCurrentSession().saveOrUpdate(entity);
+        getSessionFactory().getCurrentSession().saveOrUpdate(entity);
     }
 
     @Override
     public void delete(T entity) {
-        this.getSessionFactory().getCurrentSession().delete(entity);
+        getSessionFactory().getCurrentSession().delete(entity);
     }
 
     @Override
     public void delete(Class<T> entityClass, Object id) {
         try {
-            this.getSessionFactory().getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getField("id").getType().cast(id)).executeUpdate();
-        } catch (NoSuchFieldException var4) {
-            var4.printStackTrace();
+            getSessionFactory().getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getField("id").getType().cast(id)).executeUpdate();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
         }
 
     }
@@ -78,11 +79,11 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     public Page getAllByPage(Class<T> entityClass, int pageNumber, int pageSize) {
         page.setCurrentPage(pageNumber);
         page.setPageSize(pageSize);
-        Session session=getSessionFactory().getCurrentSession();
-        Query query = session.createQuery("select count(en) from "+entityClass.getSimpleName()+" en");
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.createQuery("select count(en) from " + entityClass.getSimpleName() + " en");
         page.setTotalRecords(Integer.parseInt(String.valueOf(query.getSingleResult())));
-        page.setTotalPageNo(Math.round(Math.ceil(page.getTotalRecords()/ (double)pageSize)));
-        query=session.createQuery("from " + entityClass.getSimpleName());
+        page.setTotalPageNo(Math.round(Math.ceil(page.getTotalRecords() / (double) pageSize)));
+        query = session.createQuery("from " + entityClass.getSimpleName());
         query.setMaxResults(pageSize);
         page.setData(query.setFirstResult(pageNumber - 1).setMaxResults(pageSize).getResultList());
         return page;
@@ -90,12 +91,12 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 
     @Override
     public long count(Class<T> entityClass) {
-        return (long)Integer.valueOf(String.valueOf(this.getSessionFactory().getCurrentSession().createQuery("select count(*) from " + entityClass.getSimpleName()).getSingleResult()));
+        return (long) Integer.valueOf(String.valueOf(this.getSessionFactory().getCurrentSession().createQuery("select count(*) from " + entityClass.getSimpleName()).getSingleResult()));
     }
 
     @Override
     public void batchToSave(List<T> entities) {
-        for(int i = 0; i < entities.size(); ++i) {
+        for (int i = 0; i < entities.size(); ++i) {
             this.sessionFactory.getCurrentSession().save(entities.get(i));
             if (i % 20 == 0) {
                 this.sessionFactory.getCurrentSession().flush();
