@@ -2,18 +2,17 @@ package controller;
 
 import bean.Page;
 import entity.DataDictionaryEntity;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.DataDictionaryService;
 
+import java.util.List;
+
 @Controller
 public class DataDictionaryController {
+
     private final DataDictionaryService dataDictionaryService;
 
     public DataDictionaryController(DataDictionaryService dataDictionaryService) {

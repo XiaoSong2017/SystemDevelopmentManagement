@@ -34,8 +34,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Jetty 9.4.19.v20190610" level="application_server_libraries" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
