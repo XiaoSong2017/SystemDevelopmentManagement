@@ -67,7 +67,8 @@
             <dt><i class="Hui-iconfont">&#xe616;</i>數據字典<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="article-list.html" data-title="數據字典管理" href="javascript:void(0)">數據字典管理</a></li>
+                    <li><a data-href="data-dictionary-list.html" data-title="數據字典管理"
+                           href="javascript:void(0)">數據字典管理</a></li>
                 </ul>
             </dd>
         </dl>
@@ -77,7 +78,8 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="article-list.html" data-title="知識庫管理" href="javascript:void(0)">知識庫管理</a>
+                        <li><a data-href="data-dictionary-list.html" data-title="知識庫管理"
+                               href="javascript:void(0)">知識庫管理</a>
                         </li>
                     </ul>
                 </dd>
@@ -88,7 +90,7 @@
                             class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                     <dd>
                         <ul>
-                            <li><a data-href="article-list.html" data-title="API及組件管理"
+                            <li><a data-href="data-dictionary-list.html" data-title="API及組件管理"
                                    href="javascript:void(0)">API及組件管理</a></li>
                         </ul>
                     </dd>
@@ -105,7 +107,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="數據字典" data-href="article-list.html">數據字典</span>
+                    <span title="數據字典" data-href="data-dictionary-list.html">數據字典</span>
                     <em></em>
                 </li>
             </ul>
@@ -122,7 +124,7 @@
     <div id="iframe_box" class="Hui-article">
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe scrolling="yes" frameborder="0" src="article-list.html"></iframe>
+            <iframe scrolling="yes" frameborder="0" src="data-dictionary-list.html"></iframe>
         </div>
     </div>
 </section>
@@ -145,14 +147,14 @@
     $(function () {
         $("#min_title_list li").contextMenu('Huiadminmenu', {
             bindings: {
-                'closethis': function(t) {
+                'closethis': function (t) {
                     console.log(t);
-                    if(t.find("i")){
+                    if (t.find("i")) {
                         t.find("i").trigger("click");
                     }
                 },
-                'closeall': function(t) {
-                    alert('Trigger was '+t.id+'\nAction was Email');
+                'closeall': function (t) {
+                    alert('Trigger was ' + t.id + '\nAction was Email');
                 }
             }
         });
