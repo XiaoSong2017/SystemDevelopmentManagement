@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class KnowledgeRepositoryService {
+
     private KnowledgeTypeEntityDao knowledgeTypeEntityDao;
+
     private KnowledgeRepositoryEntityDao knowledgeRepositoryEntityDao;
 
     public KnowledgeRepositoryService() {

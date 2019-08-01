@@ -14,10 +14,6 @@ public class DataDictionaryService {
     public DataDictionaryService() {
     }
 
-    public DataDictionaryEntityDao getDataDictionaryEntityDao() {
-        return this.dataDictionaryEntityDao;
-    }
-
     public void setDataDictionaryEntityDao(DataDictionaryEntityDao dataDictionaryEntityDao) {
         this.dataDictionaryEntityDao = dataDictionaryEntityDao;
     }

@@ -26,7 +26,7 @@ public class ApiComponentService {
 
     @Transactional(readOnly = true)
     public List<ApiComponentEntity> getAll() {
-        return this.apiComponentEntityDao.getAll(ApiComponentEntity.class);
+        return apiComponentEntityDao.getAll(ApiComponentEntity.class);
     }
 
     @Transactional(readOnly = true)

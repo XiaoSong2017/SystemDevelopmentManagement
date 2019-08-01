@@ -22,12 +22,12 @@ public class ApiComponentController {
     @RequestMapping("/apiComponentAll")
     @ResponseBody
     public List<ApiComponentEntity> getAll() {
-        return this.apiComponentService.getAll();
+        return apiComponentService.getAll();
     }
 
     @RequestMapping(value = "/apiComponentAllByPage", method = RequestMethod.POST)
     @ResponseBody
     public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
-        return this.apiComponentService.getAllByPage(pageNumber, pageSize);
+        return apiComponentService.getAllByPage(pageNumber, pageSize);
     }
 }

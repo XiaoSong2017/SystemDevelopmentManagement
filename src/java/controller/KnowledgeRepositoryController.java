@@ -22,7 +22,7 @@ public class KnowledgeRepositoryController {
     @RequestMapping("/knowledgeRepositoryAll")
     @ResponseBody
     public List<KnowledgeRepositoryEntity> getAll() {
-        return this.knowledgeRepositoryService.getAll();
+        return knowledgeRepositoryService.getAll();
     }
 
     @RequestMapping(value = "/knowledgeRepositoryAllByPage", method = RequestMethod.POST)
