@@ -11,5 +11,11 @@ E:/IdeaProject/System development management/src/resource/applicationContext.xml
       <jdbc-driver>oracle.jdbc.driver.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@//10.148.202.14:1521/PUBMESDV</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="oracle.jdbc.driver.OracleData Source - jdbc:oracle:thin:@//10.136.158.4:1521/IH0" uuid="91e96c06-9dac-4d05-a460-6d90dad24f46">
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>oracle.jdbc.driver.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//10.136.158.4:1521/IH0</jdbc-url>
+    </data-source>
   </component>
 </project>
