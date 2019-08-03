@@ -35,4 +35,9 @@ public class KnowledgeRepositoryService {
     public Page<KnowledgeRepositoryEntity> getAllByPage(int pageNumber, int pageSize) {
         return knowledgeRepositoryEntityDao.getAllByPage(KnowledgeRepositoryEntity.class,pageNumber,pageSize);
     }
+
+    @Transactional
+    public boolean deleteKnowledgeRepositoryById(int id) {
+        return knowledgeRepositoryEntityDao.delete(KnowledgeRepositoryEntity.class,id);
+    }
 }

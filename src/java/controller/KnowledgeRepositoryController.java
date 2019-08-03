@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSONObject;
 import entity.KnowledgeRepositoryEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +30,13 @@ public class KnowledgeRepositoryController {
     @ResponseBody
     public Page<KnowledgeRepositoryEntity> getAllByPage(Integer pageNumber, Integer pageSize) {
         return knowledgeRepositoryService.getAllByPage(pageNumber, pageSize);
+    }
+
+    @RequestMapping(value = "/deleteKnowledgeRepositoryById",method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteKnowledgeRepositoryById(int id){
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("result",knowledgeRepositoryService.deleteKnowledgeRepositoryById(id));
+        return jsonObject.toJSONString();
     }
 }

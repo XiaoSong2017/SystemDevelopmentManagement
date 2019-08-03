@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSONObject;
 import entity.DataDictionaryEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +30,13 @@ public class DataDictionaryController {
     @ResponseBody
     public Page<DataDictionaryEntity> getAllByPage(int pageNumber, int pageSize) {
         return dataDictionaryService.getAllByPage(pageNumber, pageSize);
+    }
+
+    @RequestMapping(value = "/deleteDataDictionaryById",method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteDataDictionaryById(int id){
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("result",dataDictionaryService.deleteDataDictionaryById(id));
+        return jsonObject.toJSONString();
     }
 }

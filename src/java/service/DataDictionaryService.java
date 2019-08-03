@@ -27,4 +27,9 @@ public class DataDictionaryService {
     public Page<DataDictionaryEntity> getAllByPage(int pageNumber, int pageSize) {
         return dataDictionaryEntityDao.getAllByPage(DataDictionaryEntity.class,pageNumber,pageSize);
     }
+
+    @Transactional
+    public boolean deleteDataDictionaryById(int id) {
+        return dataDictionaryEntityDao.delete(DataDictionaryEntity.class,id);
+    }
 }

@@ -182,6 +182,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'controller/deleteApiComponentById',
+                async:true,
                 dataType: 'json',
                 data:{'id':id},
                 success: function (data) {

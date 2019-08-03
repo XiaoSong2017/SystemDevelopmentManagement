@@ -62,7 +62,7 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     }
 
     @Override
-    public Boolean delete(Class<T> entityClass,Object id) {
+    public Boolean delete(Class<T> entityClass, Object id) {
         try {
             getSessionFactory().getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getDeclaredField("id").getType().cast(id)).executeUpdate();
             return true;
