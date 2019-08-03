@@ -32,11 +32,11 @@ public class ApiComponentController {
         return apiComponentService.getAllByPage(pageNumber, pageSize);
     }
 
-    @RequestMapping(value = "/deleteApiComponentById",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteApiComponentById", method = RequestMethod.POST)
     @ResponseBody
-    public String deleteApiComponentById(int id){
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("result",apiComponentService.deleteApiComponentById(id));
+    public String deleteApiComponentById(int id) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", apiComponentService.deleteApiComponentById(id));
         return jsonObject.toJSONString();
     }
 }

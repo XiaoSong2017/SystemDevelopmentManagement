@@ -32,11 +32,11 @@ public class DataDictionaryController {
         return dataDictionaryService.getAllByPage(pageNumber, pageSize);
     }
 
-    @RequestMapping(value = "/deleteDataDictionaryById",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteDataDictionaryById", method = RequestMethod.POST)
     @ResponseBody
-    public String deleteDataDictionaryById(int id){
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("result",dataDictionaryService.deleteDataDictionaryById(id));
+    public String deleteDataDictionaryById(int id) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", dataDictionaryService.deleteDataDictionaryById(id));
         return jsonObject.toJSONString();
     }
 }

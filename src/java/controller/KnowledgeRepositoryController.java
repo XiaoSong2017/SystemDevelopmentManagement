@@ -32,11 +32,11 @@ public class KnowledgeRepositoryController {
         return knowledgeRepositoryService.getAllByPage(pageNumber, pageSize);
     }
 
-    @RequestMapping(value = "/deleteKnowledgeRepositoryById",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteKnowledgeRepositoryById", method = RequestMethod.POST)
     @ResponseBody
-    public String deleteKnowledgeRepositoryById(int id){
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("result",knowledgeRepositoryService.deleteKnowledgeRepositoryById(id));
+    public String deleteKnowledgeRepositoryById(int id) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", knowledgeRepositoryService.deleteKnowledgeRepositoryById(id));
         return jsonObject.toJSONString();
     }
 }
