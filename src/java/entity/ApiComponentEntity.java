@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "API_COMPONENTS")
 public class ApiComponentEntity {
-    private long id;
-    private long typeId;
+    private Integer id;
+    private Integer typeId;
     private String functionMacrotaxonomy;
     private String name;
     private ApiComponentTypeEntity apiComponentTypeByTypeId;
@@ -19,21 +19,21 @@ public class ApiComponentEntity {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "TYPE_ID", nullable = false)
-    public long getTypeId() {
+    public Integer getTypeId() {
         return this.typeId;
     }
 
-    public void setTypeId(long typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
@@ -62,7 +62,7 @@ public class ApiComponentEntity {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             ApiComponentEntity that = (ApiComponentEntity) o;
-            return this.id == that.id && this.typeId == that.typeId && Objects.equals(this.functionMacrotaxonomy, that.functionMacrotaxonomy) && Objects.equals(this.name, that.name);
+            return this.id.equals(that.id) && this.typeId.equals(that.typeId) && Objects.equals(this.functionMacrotaxonomy, that.functionMacrotaxonomy) && Objects.equals(this.name, that.name);
         } else {
             return false;
         }

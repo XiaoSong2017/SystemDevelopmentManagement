@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSONObject;
 import entity.ApiComponentEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +30,13 @@ public class ApiComponentController {
     @ResponseBody
     public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
         return apiComponentService.getAllByPage(pageNumber, pageSize);
+    }
+
+    @RequestMapping(value = "/deleteApiComponentById",method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteApiComponentById(int id){
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("result",apiComponentService.deleteApiComponentById(id));
+        return jsonObject.toJSONString();
     }
 }

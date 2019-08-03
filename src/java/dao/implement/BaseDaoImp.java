@@ -32,9 +32,9 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     public T getById(Class<T> entityClass, Object id) {
         List list;
         try {
-            list = this.getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getField("id").getType().cast(id)).getResultList();
-        } catch (NoSuchFieldException var5) {
-            var5.printStackTrace();
+            list = this.getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getDeclaredField("id").getType().cast(id)).getResultList();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -46,8 +46,9 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     }
 
     @Override
-    public void update(T entity) {
+    public boolean update(T entity) {
         getSessionFactory().getCurrentSession().update(entity);
+        return true;
     }
 
     @Override
@@ -61,13 +62,14 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     }
 
     @Override
-    public void delete(Class<T> entityClass, Object id) {
+    public Boolean delete(Class<T> entityClass,Object id) {
         try {
-            getSessionFactory().getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getField("id").getType().cast(id)).executeUpdate();
+            getSessionFactory().getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1").setParameter(1, entityClass.getDeclaredField("id").getType().cast(id)).executeUpdate();
+            return true;
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
+            return false;
         }
-
     }
 
     @Override
@@ -91,11 +93,11 @@ public class BaseDaoImp<T> implements BaseDao<T> {
 
     @Override
     public long count(Class<T> entityClass) {
-        return (long) Integer.valueOf(String.valueOf(this.getSessionFactory().getCurrentSession().createQuery("select count(*) from " + entityClass.getSimpleName()).getSingleResult()));
+        return Integer.parseInt(String.valueOf(this.getSessionFactory().getCurrentSession().createQuery("select count(*) from " + entityClass.getSimpleName()).getSingleResult()));
     }
 
     @Override
-    public void batchToSave(List<T> entities) {
+    public boolean batchToSave(List<T> entities) {
         for (int i = 0; i < entities.size(); ++i) {
             this.sessionFactory.getCurrentSession().save(entities.get(i));
             if (i % 20 == 0) {
@@ -103,23 +105,30 @@ public class BaseDaoImp<T> implements BaseDao<T> {
                 this.sessionFactory.getCurrentSession().clear();
             }
         }
-
+        return true;
     }
 
     @Override
-    public void batchToUpdate(List<T> entities) {
+    public boolean batchToUpdate(List<T> entities) {
         for (T entity : entities) {
             sessionFactory.getCurrentSession().update(entity);
         }
+        return true;
     }
 
 
     @Override
-    public void batchToDelete(Class<T> entityClass, List<String> id) {
+    public boolean batchToDelete(Class<T> entityClass, List<Object> id) {
         Query query = sessionFactory.getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1");
-        for (String i : id) {
-            query.setParameter(1, i);
+        for (Object i : id) {
+            try {
+                query.setParameter(1, entityClass.getDeclaredField("id").getType().cast(i));
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
         query.executeUpdate();
+        return true;
     }
 }

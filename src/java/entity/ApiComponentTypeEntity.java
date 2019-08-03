@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "API_COMPONENT_TYPES")
 public class ApiComponentTypeEntity {
-    private long id;
+    private Integer id;
     private String name;
     private Set<ApiComponentEntity> apiComponentsById;
 
@@ -23,11 +23,11 @@ public class ApiComponentTypeEntity {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,14 +46,14 @@ public class ApiComponentTypeEntity {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             ApiComponentTypeEntity that = (ApiComponentTypeEntity)o;
-            return this.id == that.id && Objects.equals(this.name, that.name);
+            return this.id.equals(that.id) && Objects.equals(this.name, that.name);
         } else {
             return false;
         }
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.name});
+        return Objects.hash(this.id, this.name);
     }
 
     @JsonIgnore

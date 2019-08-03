@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "KNOWLEDGE_TYPES")
 public class KnowledgeTypeEntity {
-    private long id;
+    private Integer id;
     private String name;
     private Set<KnowledgeRepositoryEntity> knowledgeRepositoriesById;
 
@@ -23,11 +23,11 @@ public class KnowledgeTypeEntity {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,7 +46,7 @@ public class KnowledgeTypeEntity {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             KnowledgeTypeEntity that = (KnowledgeTypeEntity)o;
-            return this.id == that.id && Objects.equals(this.name, that.name);
+            return this.id.equals(that.id) && Objects.equals(this.name, that.name);
         } else {
             return false;
         }

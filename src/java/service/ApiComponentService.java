@@ -33,4 +33,9 @@ public class ApiComponentService {
     public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
         return apiComponentEntityDao.getAllByPage(ApiComponentEntity.class,pageNumber,pageSize);
     }
+
+    @Transactional
+    public Boolean deleteApiComponentById(int id) {
+        return apiComponentEntityDao.delete(ApiComponentEntity.class,id);
+    }
 }

@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "KNOWLEDGE_REPOSITORY")
 public class KnowledgeRepositoryEntity {
-    private long id;
-    private long typeId;
+    private Integer id;
+    private Integer typeId;
     private String number;
     private String description;
     private Date date;
@@ -21,21 +21,21 @@ public class KnowledgeRepositoryEntity {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "TYPE_ID", nullable = false)
-    public long getTypeId() {
+    public Integer getTypeId() {
         return this.typeId;
     }
 
-    public void setTypeId(long typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
@@ -75,7 +75,7 @@ public class KnowledgeRepositoryEntity {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             KnowledgeRepositoryEntity that = (KnowledgeRepositoryEntity)o;
-            return this.id == that.id && this.typeId == that.typeId && Objects.equals(this.number, that.number) && Objects.equals(this.description, that.description) && Objects.equals(this.date, that.date);
+            return this.id.equals(that.id) && this.typeId.equals(that.typeId) && Objects.equals(this.number, that.number) && Objects.equals(this.description, that.description) && Objects.equals(this.date, that.date);
         } else {
             return false;
         }

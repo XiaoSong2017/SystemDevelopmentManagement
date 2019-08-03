@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DATA_DICTIONARIES")
 public class DataDictionaryEntity {
-    private long id;
+    private Integer id;
     private String name;
     private String abbreviation;
     private String fullName;
@@ -21,11 +21,11 @@ public class DataDictionaryEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,7 +74,7 @@ public class DataDictionaryEntity {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             DataDictionaryEntity that = (DataDictionaryEntity)o;
-            return this.id == that.id && Objects.equals(this.name, that.name) && Objects.equals(this.abbreviation, that.abbreviation) && Objects.equals(this.fullName, that.fullName) && Objects.equals(this.dataType, that.dataType);
+            return this.id.equals(that.id) && Objects.equals(this.name, that.name) && Objects.equals(this.abbreviation, that.abbreviation) && Objects.equals(this.fullName, that.fullName) && Objects.equals(this.dataType, that.dataType);
         } else {
             return false;
         }

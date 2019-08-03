@@ -6,6 +6,10 @@ import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Dao层操作工具类
+ * @param <T>数据映射实体类型
+ */
 public interface BaseDao<T> {
     /**
      * 根据ID加载实体
@@ -29,7 +33,7 @@ public interface BaseDao<T> {
      *
      * @param entity 对应实体
      */
-    void update(@NotNull T entity);
+    boolean update(@NotNull T entity);
 
     /**
      * 保存或更新实体
@@ -49,7 +53,7 @@ public interface BaseDao<T> {
      * @param entityClass 对应实体类
      * @param id 对应实体类ID
      */
-    void delete(@NotNull Class<T> entityClass, @NotNull Object id);
+    Boolean delete(@NotNull Class<T> entityClass, @NotNull Object id);
 
     /**
      * 获得所有实体
@@ -80,18 +84,18 @@ public interface BaseDao<T> {
      * 批量保存
      * @param entities 对应实体对象列表
      */
-    void batchToSave(@NotNull List<T> entities);
+    boolean batchToSave(@NotNull List<T> entities);
 
     /**
      * 批量更新
      * @param entities 对应实体对象列表
      */
-    void batchToUpdate(@NotNull List<T> entities);
+    boolean batchToUpdate(@NotNull List<T> entities);
 
     /**
      * 批量删除
      * @param entityClass 对应实体类
      * @param id 对应实体ID列表
      */
-    void batchToDelete(@NotNull Class<T> entityClass, @NotNull List<String> id);
+    boolean batchToDelete(@NotNull Class<T> entityClass, @NotNull List<Object> id);
 }
