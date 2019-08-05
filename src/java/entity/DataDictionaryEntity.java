@@ -1,11 +1,7 @@
 package entity;
 
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "DATA_DICTIONARIES")
@@ -20,6 +16,7 @@ public class DataDictionaryEntity {
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public Integer getId() {
         return this.id;

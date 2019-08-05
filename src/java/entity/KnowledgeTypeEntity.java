@@ -3,13 +3,7 @@ package entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "KNOWLEDGE_TYPES")
@@ -22,6 +16,7 @@ public class KnowledgeTypeEntity {
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "ID", nullable = false)
     public Integer getId() {
         return this.id;

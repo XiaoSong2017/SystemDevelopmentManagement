@@ -20,6 +20,7 @@ public class KnowledgeRepositoryEntity {
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "ID", nullable = false)
     public Integer getId() {
         return this.id;
