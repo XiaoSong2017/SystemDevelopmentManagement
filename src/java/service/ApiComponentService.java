@@ -4,7 +4,10 @@ import bean.Page;
 import dao.ApiComponentEntityDao;
 import dao.ApiComponentTypeEntityDao;
 import entity.ApiComponentEntity;
+
 import java.util.List;
+
+import entity.ApiComponentTypeEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,17 +28,33 @@ public class ApiComponentService {
     }
 
     @Transactional(readOnly = true)
-    public List<ApiComponentEntity> getAll() {
+    public List<ApiComponentEntity> getApiComponentAll() {
         return apiComponentEntityDao.getAll(ApiComponentEntity.class);
     }
 
     @Transactional(readOnly = true)
     public Page<ApiComponentEntity> getAllByPage(int pageNumber, int pageSize) {
-        return apiComponentEntityDao.getAllByPage(ApiComponentEntity.class,pageNumber,pageSize);
+        return apiComponentEntityDao.getAllByPage(ApiComponentEntity.class, pageNumber, pageSize);
     }
 
     @Transactional
     public Boolean deleteApiComponentById(int id) {
-        return apiComponentEntityDao.delete(ApiComponentEntity.class,id);
+        return apiComponentEntityDao.delete(ApiComponentEntity.class, id);
+    }
+
+    @Transactional
+    public boolean saveApiComponent(ApiComponentEntity apiComponentEntity) {
+        apiComponentEntityDao.save(apiComponentEntity);
+        return true;
+    }
+
+    @Transactional
+    public boolean updateApiComponent(ApiComponentEntity apiComponentEntity) {
+        return apiComponentEntityDao.update(apiComponentEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ApiComponentTypeEntity> getApiComponentTypeAll() {
+        return apiComponentTypeEntityDao.getAll(ApiComponentTypeEntity.class);
     }
 }
