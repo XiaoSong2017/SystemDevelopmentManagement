@@ -57,4 +57,9 @@ public class ApiComponentService {
     public List<ApiComponentTypeEntity> getApiComponentTypeAll() {
         return apiComponentTypeEntityDao.getAll(ApiComponentTypeEntity.class);
     }
+
+    @Transactional(readOnly = true)
+    public ApiComponentEntity getApiComponentById(Integer id) {
+        return apiComponentEntityDao.getById(ApiComponentEntity.class,id);
+    }
 }

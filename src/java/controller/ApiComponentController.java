@@ -40,6 +40,12 @@ public class ApiComponentController {
         return apiComponentService.getAllByPage(pageNumber, pageSize);
     }
 
+    @RequestMapping(value = "/apiComponentById", method = RequestMethod.POST)
+    @ResponseBody
+    public @NotNull ApiComponentEntity getApiComponentById(@NotNull Integer id){
+        return apiComponentService.getApiComponentById(id);
+    }
+
     @RequestMapping(value = "/deleteApiComponentById", method = RequestMethod.POST)
     @ResponseBody
     public String deleteApiComponentById(int id) {
