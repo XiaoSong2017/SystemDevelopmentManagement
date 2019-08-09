@@ -40,4 +40,21 @@ public class KnowledgeRepositoryService {
     public boolean deleteKnowledgeRepositoryById(int id) {
         return knowledgeRepositoryEntityDao.delete(KnowledgeRepositoryEntity.class,id);
     }
+
+    @Transactional(readOnly = true)
+    public KnowledgeRepositoryEntity getKnowledgeRepositoryById(Integer id) {
+        return knowledgeRepositoryEntityDao.getById(KnowledgeRepositoryEntity.class,id);
+    }
+
+    @Transactional
+    public boolean saveKnowledgeRepository(KnowledgeRepositoryEntity knowledgeRepositoryEntity) {
+        knowledgeRepositoryEntityDao.save(knowledgeRepositoryEntity);
+        return true;
+    }
+
+
+    @Transactional
+    public boolean updateKnowledgeRepository(KnowledgeRepositoryEntity knowledgeRepository) {
+        return knowledgeRepositoryEntityDao.update(knowledgeRepository);
+    }
 }

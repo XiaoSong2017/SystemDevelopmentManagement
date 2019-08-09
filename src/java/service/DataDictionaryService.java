@@ -32,4 +32,21 @@ public class DataDictionaryService {
     public boolean deleteDataDictionaryById(int id) {
         return dataDictionaryEntityDao.delete(DataDictionaryEntity.class,id);
     }
+
+    @Transactional(readOnly = true)
+    public DataDictionaryEntity getDataDictionaryById(Integer id) {
+        return dataDictionaryEntityDao.getById(DataDictionaryEntity.class,id);
+    }
+
+
+    @Transactional
+    public boolean saveDataDictionary(DataDictionaryEntity dataDictionary) {
+        dataDictionaryEntityDao.save(dataDictionary);
+        return true;
+    }
+
+    @Transactional
+    public boolean updateDataDictionary(DataDictionaryEntity dataDictionary) {
+        return dataDictionaryEntityDao.update(dataDictionary);
+    }
 }

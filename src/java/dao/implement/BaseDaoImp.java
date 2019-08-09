@@ -120,15 +120,16 @@ public class BaseDaoImp<T> implements BaseDao<T> {
     @Override
     public boolean batchToDelete(Class<T> entityClass, List<Object> id) {
         Query query = sessionFactory.getCurrentSession().createQuery("delete from " + entityClass.getSimpleName() + " en where en.id=?1");
-        for (Object i : id) {
-            try {
-                query.setParameter(1, entityClass.getDeclaredField("id").getType().cast(i));
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
+        try {
+            Class<?> type = entityClass.getDeclaredField("id").getType();
+            for (Object i : id) {
+                query.setParameter(1, type.cast(i));
             }
+            query.executeUpdate();
+            return true;
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return false;
         }
-        query.executeUpdate();
-        return true;
     }
 }

@@ -2,6 +2,7 @@ package controller;
 
 import bean.Page;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.istack.NotNull;
 import entity.DataDictionaryEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +33,34 @@ public class DataDictionaryController {
         return dataDictionaryService.getAllByPage(pageNumber, pageSize);
     }
 
+    @RequestMapping(value = "/dataDictionaryById", method = RequestMethod.POST)
+    @ResponseBody
+    public @NotNull
+    DataDictionaryEntity getDataDictionaryById(@NotNull Integer id){
+        return dataDictionaryService.getDataDictionaryById(id);
+    }
+
     @RequestMapping(value = "/deleteDataDictionaryById", method = RequestMethod.POST)
     @ResponseBody
     public String deleteDataDictionaryById(int id) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", dataDictionaryService.deleteDataDictionaryById(id));
+        return jsonObject.toJSONString();
+    }
+
+    @RequestMapping(value = "/saveDataDictionary", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveDataDictionary(@NotNull DataDictionaryEntity dataDictionary) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", dataDictionaryService.saveDataDictionary(dataDictionary));
+        return jsonObject.toJSONString();
+    }
+
+    @RequestMapping(value = "/updateDataDictionary", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateDataDictionary(@NotNull DataDictionaryEntity dataDictionary) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", dataDictionaryService.updateDataDictionary(dataDictionary));
         return jsonObject.toJSONString();
     }
 }

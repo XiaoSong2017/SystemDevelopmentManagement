@@ -2,6 +2,7 @@ package controller;
 
 import bean.Page;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.istack.NotNull;
 import entity.KnowledgeRepositoryEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +33,34 @@ public class KnowledgeRepositoryController {
         return knowledgeRepositoryService.getAllByPage(pageNumber, pageSize);
     }
 
+    @RequestMapping(value = "/knowledgeRepositoryById", method = RequestMethod.POST)
+    @ResponseBody
+    public @NotNull
+    KnowledgeRepositoryEntity getKnowledgeRepositoryById(@NotNull Integer id){
+        return knowledgeRepositoryService.getKnowledgeRepositoryById(id);
+    }
+
     @RequestMapping(value = "/deleteKnowledgeRepositoryById", method = RequestMethod.POST)
     @ResponseBody
     public String deleteKnowledgeRepositoryById(int id) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", knowledgeRepositoryService.deleteKnowledgeRepositoryById(id));
+        return jsonObject.toJSONString();
+    }
+
+    @RequestMapping(value = "/saveKnowledgeRepository", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveKnowledgeRepository(@NotNull KnowledgeRepositoryEntity knowledgeRepositoryEntity) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", knowledgeRepositoryService.saveKnowledgeRepository(knowledgeRepositoryEntity));
+        return jsonObject.toJSONString();
+    }
+
+    @RequestMapping(value = "/updateKnowledgeRepository", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateKnowledgeRepository(@NotNull KnowledgeRepositoryEntity knowledgeRepository) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", knowledgeRepositoryService.updateKnowledgeRepository(knowledgeRepository));
         return jsonObject.toJSONString();
     }
 }
