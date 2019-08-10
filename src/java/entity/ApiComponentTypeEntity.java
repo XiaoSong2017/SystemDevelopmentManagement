@@ -1,5 +1,6 @@
 package entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import java.util.Set;
@@ -52,6 +53,7 @@ public class ApiComponentTypeEntity {
     }
 
     @JsonIgnore
+    @JSONField(serialize = false)
     @OneToMany(mappedBy = "apiComponentTypeByTypeId", fetch = FetchType.LAZY)
     public Set<ApiComponentEntity> getApiComponentsById() {
         return this.apiComponentsById;

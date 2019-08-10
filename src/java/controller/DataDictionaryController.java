@@ -1,6 +1,8 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.istack.NotNull;
 import entity.DataDictionaryEntity;
@@ -23,8 +25,10 @@ public class DataDictionaryController {
 
     @RequestMapping("/dataDictionaryAll")
     @ResponseBody
-    public List<DataDictionaryEntity> getAll() {
-        return dataDictionaryService.getAll();
+    public String getAll() {
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("data",dataDictionaryService.getAll());
+        return jsonObject.toJSONString();
     }
 
     @RequestMapping(value = "/dataDictionaryAllByPage", method = RequestMethod.POST)

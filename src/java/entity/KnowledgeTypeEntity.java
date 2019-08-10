@@ -1,5 +1,6 @@
 package entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import java.util.Set;
@@ -52,6 +53,7 @@ public class KnowledgeTypeEntity {
     }
 
     @JsonIgnore
+    @JSONField(serialize = false)
     @OneToMany(mappedBy = "knowledgeTypeByTypeId", fetch = FetchType.LAZY)
     public Set<KnowledgeRepositoryEntity> getKnowledgeRepositoriesById() {
         return this.knowledgeRepositoriesById;

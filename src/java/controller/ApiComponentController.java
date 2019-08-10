@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.istack.NotNull;
 import entity.ApiComponentEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ApiComponentService;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -30,8 +32,13 @@ public class ApiComponentController {
 
     @RequestMapping(value = "/apiComponentAll", method = RequestMethod.POST)
     @ResponseBody
-    public List<ApiComponentEntity> getApiComponentAll() {
-        return apiComponentService.getApiComponentAll();
+    public String getApiComponentAll() {
+        JSONObject jsonObject=new JSONObject();
+//        List list=apiComponentService.getApiComponentAll();
+//        System.out.println("list:"+list);
+        jsonObject.put("data", apiComponentService.getApiComponentAll());
+//        System.out.println("jsonObject:"+jsonObject.toJSONString());
+        return jsonObject.toJSONString();
     }
 
     @RequestMapping(value = "/apiComponentAllByPage", method = RequestMethod.POST)

@@ -1,6 +1,6 @@
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
-<html>
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+    <title></title>
     <!--[if IE 6]>
     <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -78,22 +79,57 @@
 <script type="text/javascript" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
     let functionMacrotaxonomy;
-    $(function () {
-        var url = document.location.toLocaleString();
-        var index=url.indexOf("?");
-        if(index<0){}
-        else {
-            console.log(index);
+    var urlParam;
+
+    function convertURLParamToJSON() {
+        var search = decodeURI(document.location.toString());
+        var result = {};
+        var arr = search.substring(search.lastIndexOf('?') + 1).split('&');
+        console.log('arr:' + arr);
+        for (var x = 0; x < arr.length; x++) {
+            var value = arr[x].split('=');
+            result[value[0]] = value[1];
         }
+        console.log('result:' + JSON.stringify(result));
+        if (JSON.stringify(result) === '{}') return null;
+        else return result;
+    }
+
+    $(function () {
+        urlParam = convertURLParamToJSON();
+        console.log('urlParam:' + JSON.stringify(urlParam));
         $.ajax({
             url: 'controller/apiComponentTypeAll',
             type: 'POST',
             dataType: 'json',
-            sync: true,
+            async: true,
             success: (data) => {
                 $('#typeId').empty();
-                for (var i = 0; i < data.length; ++i) {
-                    $('#typeId').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                functionMacrotaxonomy = UE.getEditor('functionMacrotaxonomy');
+                console.log("urlParam:" + urlParam);
+                if (!$.isEmptyObject(urlParam)) {
+                    $.ajax({
+                        url: 'controller/apiComponentById',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: {id: urlParam.id},
+                        success: (data1) => {
+                            for (var i = 0; i < data.length; ++i) {
+                                if (data1.apiComponentTypeByTypeId.id === data[i].id)
+                                    $('#typeId').append('<option selected value="' + data[i].id + '">' + data[i].name + '</option>');
+                                else
+                                    $('#typeId').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                            }
+                            $('#name').val(data1.name);
+                            functionMacrotaxonomy.setContent(data1.functionMacrotaxonomy + '');
+                        }, error: () => {
+                            layer.msg('加载数据失败!請重試！', {icon: 1, time: 1000});
+                        }
+                    });
+                } else {
+                    for (var i = 0; i < data.length; ++i)
+                        $('#typeId').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
                 }
             }, error: () => {
                 layer.msg('網絡出錯!請重試！', {icon: 1, time: 1000});
@@ -104,7 +140,6 @@
             radioClass: 'iradio-blue',
             increaseArea: '20%'
         });
-        functionMacrotaxonomy = UE.getEditor('functionMacrotaxonomy');
         //表单验证
         $("#form-article-add").validate({
             rules: {
@@ -130,27 +165,52 @@
         //layer.msg($('#typeId option:checked').val(),{icon:1,time:3000});
         //layer.msg($('#name').val(), {icon: 1, time: 1000});
         //layer.msg(functionMacrotaxonomy.getContent(), {icon: 1, time: 1000});
-        $.ajax({
-            url: 'controller/saveApiComponent',
-            type: 'POST',
-            async: true,
-            dataType: 'json',
-            data: {
-                name: $('#name').val(),
-                typeId: $('#typeId option:checked').val(),
-                functionMacrotaxonomy: functionMacrotaxonomy.getContent()
-            },
-            success: (data) => {
-                if (data.result) {
-                    alert('已完成！');
-                    removeIframe();
-                } else {
-                    layer.msg('保存出錯!請重試！', {icon: 1, time: 1000});
+        if (urlParam) {
+            $.ajax({
+                url: 'controller/updateApiComponent',
+                type: 'POST',
+                async: true,
+                dataType: 'json',
+                data: {
+                    id: urlParam.id,
+                    name: $('#name').val(),
+                    typeId: $('#typeId option:checked').val(),
+                    functionMacrotaxonomy: functionMacrotaxonomy.getContent()
+                },
+                success: (data) => {
+                    if (data.result) {
+                        alert('已完成！');
+                        removeIframe();
+                    } else {
+                        layer.msg('保存出錯!請重試！', {icon: 1, time: 1000});
+                    }
+                }, error: () => {
+                    layer.msg('網絡出錯!請重試！', {icon: 1, time: 1000});
                 }
-            }, error: () => {
-                layer.msg('網絡出錯!請重試！', {icon: 1, time: 1000});
-            }
-        });
+            });
+        } else {
+            $.ajax({
+                url: 'controller/saveApiComponent',
+                type: 'POST',
+                async: true,
+                dataType: 'json',
+                data: {
+                    name: $('#name').val(),
+                    typeId: $('#typeId option:checked').val(),
+                    functionMacrotaxonomy: functionMacrotaxonomy.getContent()
+                },
+                success: (data) => {
+                    if (data.result) {
+                        alert('已完成！');
+                        removeIframe();
+                    } else {
+                        layer.msg('保存出錯!請重試！', {icon: 1, time: 1000});
+                    }
+                }, error: () => {
+                    layer.msg('網絡出錯!請重試！', {icon: 1, time: 1000});
+                }
+            });
+        }
     }
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

@@ -23,8 +23,10 @@ public class KnowledgeRepositoryController {
 
     @RequestMapping("/knowledgeRepositoryAll")
     @ResponseBody
-    public List<KnowledgeRepositoryEntity> getAll() {
-        return knowledgeRepositoryService.getAll();
+    public String getAll() {
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("data",knowledgeRepositoryService.getAll());
+        return jsonObject.toJSONString();
     }
 
     @RequestMapping(value = "/knowledgeRepositoryAllByPage", method = RequestMethod.POST)
