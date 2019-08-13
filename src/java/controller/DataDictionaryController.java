@@ -4,6 +4,7 @@ import bean.Page;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sun.istack.NotNull;
 import entity.DataDictionaryEntity;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class DataDictionaryController {
 
     @RequestMapping("/dataDictionaryAll")
     @ResponseBody
-    public String getAll() {
+    public String getDataDictionaryAll() {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("data",dataDictionaryService.getAll());
-        return jsonObject.toJSONString();
+        return JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping(value = "/dataDictionaryAllByPage", method = RequestMethod.POST)

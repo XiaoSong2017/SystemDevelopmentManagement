@@ -3,6 +3,7 @@ package controller;
 import bean.Page;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sun.istack.NotNull;
 import entity.ApiComponentEntity;
 import entity.ApiComponentTypeEntity;
@@ -38,7 +39,7 @@ public class ApiComponentController {
 //        System.out.println("list:"+list);
         jsonObject.put("data", apiComponentService.getApiComponentAll());
 //        System.out.println("jsonObject:"+jsonObject.toJSONString());
-        return jsonObject.toJSONString();
+        return JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping(value = "/apiComponentAllByPage", method = RequestMethod.POST)

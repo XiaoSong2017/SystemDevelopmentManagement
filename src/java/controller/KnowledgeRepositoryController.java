@@ -1,7 +1,9 @@
 package controller;
 
 import bean.Page;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sun.istack.NotNull;
 import entity.KnowledgeRepositoryEntity;
 import entity.KnowledgeTypeEntity;
@@ -34,7 +36,7 @@ public class KnowledgeRepositoryController {
     public String getKnowledgeRepositoryAll() {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("data",knowledgeRepositoryService.getKnowledgeRepositoryAll());
-        return jsonObject.toJSONString();
+        return JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect);
     }
 
     @RequestMapping(value = "/knowledgeRepositoryAllByPage", method = RequestMethod.POST)
