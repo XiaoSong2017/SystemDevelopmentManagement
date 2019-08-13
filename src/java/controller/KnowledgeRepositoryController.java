@@ -4,6 +4,7 @@ import bean.Page;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.istack.NotNull;
 import entity.KnowledgeRepositoryEntity;
+import entity.KnowledgeTypeEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +22,18 @@ public class KnowledgeRepositoryController {
         this.knowledgeRepositoryService = knowledgeRepositoryService;
     }
 
+    @RequestMapping(value = "/knowledgeRepositoryTypeAll", method = RequestMethod.POST)
+    @ResponseBody
+    public List<KnowledgeTypeEntity> getKnowledgeRepositoryTypeAll() {
+        return knowledgeRepositoryService.getKnowledgeRepositoryTypeAll();
+    }
+
+
     @RequestMapping("/knowledgeRepositoryAll")
     @ResponseBody
-    public String getAll() {
+    public String getKnowledgeRepositoryAll() {
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("data",knowledgeRepositoryService.getAll());
+        jsonObject.put("data",knowledgeRepositoryService.getKnowledgeRepositoryAll());
         return jsonObject.toJSONString();
     }
 

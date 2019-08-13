@@ -63,7 +63,7 @@
 </article>
 
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer /作为公共模版分离出去-->
@@ -175,7 +175,7 @@
                     id: urlParam.id,
                     name: $('#name').val(),
                     typeId: $('#typeId option:checked').val(),
-                    functionMacrotaxonomy: functionMacrotaxonomy.getContent()
+                    functionMacrotaxonomy: functionMacrotaxonomy.hasContents()?functionMacrotaxonomy.getContent():null
                 },
                 success: (data) => {
                     if (data.result) {
@@ -197,7 +197,7 @@
                 data: {
                     name: $('#name').val(),
                     typeId: $('#typeId option:checked').val(),
-                    functionMacrotaxonomy: functionMacrotaxonomy.getContent()
+                    functionMacrotaxonomy: functionMacrotaxonomy.hasContents()?functionMacrotaxonomy.getContent():null
                 },
                 success: (data) => {
                     if (data.result) {

@@ -5,6 +5,8 @@ import dao.KnowledgeRepositoryEntityDao;
 import dao.KnowledgeTypeEntityDao;
 import entity.KnowledgeRepositoryEntity;
 import java.util.List;
+
+import entity.KnowledgeTypeEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +29,7 @@ public class KnowledgeRepositoryService {
     }
 
     @Transactional(readOnly = true)
-    public List<KnowledgeRepositoryEntity> getAll() {
+    public List<KnowledgeRepositoryEntity> getKnowledgeRepositoryAll() {
         return knowledgeRepositoryEntityDao.getAll(KnowledgeRepositoryEntity.class);
     }
 
@@ -56,5 +58,10 @@ public class KnowledgeRepositoryService {
     @Transactional
     public boolean updateKnowledgeRepository(KnowledgeRepositoryEntity knowledgeRepository) {
         return knowledgeRepositoryEntityDao.update(knowledgeRepository);
+    }
+
+    @Transactional(readOnly = true)
+    public List<KnowledgeTypeEntity> getKnowledgeRepositoryTypeAll() {
+        return knowledgeTypeEntityDao.getAll(KnowledgeTypeEntity.class);
     }
 }

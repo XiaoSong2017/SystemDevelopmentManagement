@@ -31,6 +31,7 @@ public class BaseDaoImp<T> implements BaseDao<T> {
         this.page = page;
     }
 
+    @SuppressWarnings("unchecked")
     public T getById(Class<T> entityClass, Object id) {
         List list;
         try {
@@ -74,11 +75,13 @@ public class BaseDaoImp<T> implements BaseDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<T> getAll(Class<T> entityClass) {
         return getSessionFactory().getCurrentSession().createQuery("from " + entityClass.getSimpleName()).getResultList();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Page getAllByPage(Class<T> entityClass, int pageNumber, int pageSize) {
         page.setCurrentPage(pageNumber);
